@@ -1,232 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search>
-  <entry>
-    <title>Hello World</title>
-    <url>/2024/06/25/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>mysql数据备份和恢复</title>
-    <url>/2024/06/27/mysql/mysql%E6%95%B0%E6%8D%AE%E5%A4%87%E4%BB%BD%E5%92%8C%E6%81%A2%E5%A4%8D/</url>
-    <content><![CDATA[<h1 id="MySQL数据备份和恢复"><a href="#MySQL数据备份和恢复" class="headerlink" title="MySQL数据备份和恢复"></a>MySQL数据备份和恢复</h1><p><strong>为了让MySQL操作更简便，可以参考<a href="https://blog.csdn.net/qq_52853542/article/details/124669072">CSDN环境变量教程</a>配置MySQL的环境变量,这样在命令行的任何位置都可以执行MySQL的命令。</strong></p>
-<h2 id="备份单个数据库"><a href="#备份单个数据库" class="headerlink" title="备份单个数据库"></a>备份单个数据库</h2><h3 id="备份单个数据库study，不包含创建数据库的语句，恢复时需要先创建study数据库"><a href="#备份单个数据库study，不包含创建数据库的语句，恢复时需要先创建study数据库" class="headerlink" title="备份单个数据库study，不包含创建数据库的语句，恢复时需要先创建study数据库"></a>备份单个数据库study，不包含创建数据库的语句，恢复时需要先创建study数据库</h3><ol>
-<li>备份study数据库<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">mysqldump <span class="operator">-</span>u root <span class="operator">-</span>p study <span class="operator">&gt;</span> d:\study.sql</span><br></pre></td></tr></table></figure>
-2.恢复study数据库<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">mysql <span class="operator">-</span>u root <span class="operator">-</span>p <span class="operator">-</span>e &quot;create database study&quot;</span><br><span class="line">mysql <span class="operator">-</span>u root <span class="operator">-</span>p study <span class="operator">&lt;</span> d:\study.sql</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h3 id="备份单个数据库study，包含创建数据库语句"><a href="#备份单个数据库study，包含创建数据库语句" class="headerlink" title="备份单个数据库study，包含创建数据库语句"></a>备份单个数据库study，包含创建数据库语句</h3><ol>
-<li>备份study数据库<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">mysqldump <span class="operator">-</span>u root <span class="operator">-</span>p <span class="comment">--databases study &gt; d:\study.sql</span></span><br></pre></td></tr></table></figure></li>
-<li>恢复study数据库<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">mysql <span class="operator">-</span>u root <span class="operator">-</span>p <span class="operator">&lt;</span> d:\study.sql</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h2 id="备份整个MySQL数据库"><a href="#备份整个MySQL数据库" class="headerlink" title="备份整个MySQL数据库"></a>备份整个MySQL数据库</h2><h3 id="备份整个MySQL数据库，包含系统数据库"><a href="#备份整个MySQL数据库，包含系统数据库" class="headerlink" title="备份整个MySQL数据库，包含系统数据库"></a>备份整个MySQL数据库，包含系统数据库</h3><ol>
-<li>备份整个MySQL数据库<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">mysqldump <span class="operator">-</span>u root <span class="operator">-</span>p <span class="comment">--all-databases  &gt; d:\all.sql</span></span><br></pre></td></tr></table></figure></li>
-<li>恢复整个MySQL数据库<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">mysql <span class="operator">-</span>u root <span class="operator">-</span>p <span class="operator">&lt;</span> d:\all.sql</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h3 id="备份指定数据库的表，如study数据库里面的staff表"><a href="#备份指定数据库的表，如study数据库里面的staff表" class="headerlink" title="备份指定数据库的表，如study数据库里面的staff表"></a>备份指定数据库的表，如study数据库里面的staff表</h3><ol>
-<li>备份指定数据库的表<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">mysqldump <span class="operator">-</span>u root <span class="operator">-</span>p study staff <span class="operator">&gt;</span> d:\study_staff.sql</span><br></pre></td></tr></table></figure></li>
-<li>恢复指定数据库的表<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">mysql <span class="operator">-</span>u root <span class="operator">-</span>p study <span class="operator">&lt;</span> d:\study_staff.sql</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h1 id="数据未备份如何恢复"><a href="#数据未备份如何恢复" class="headerlink" title="数据未备份如何恢复"></a>数据未备份如何恢复</h1><h2 id="使用mysqlbinlog恢复数据"><a href="#使用mysqlbinlog恢复数据" class="headerlink" title="使用mysqlbinlog恢复数据"></a>使用mysqlbinlog恢复数据</h2><h3 id="数据恢复前的准备"><a href="#数据恢复前的准备" class="headerlink" title="数据恢复前的准备"></a>数据恢复前的准备</h3><p>1.MySQL安装完成后， MySQL8默认开启binlog；当数据库发生变化时，binlog会记录数据库中的所有变化；需要恢复的时候可以根据binlog中的开始位置和结束位置还原本部分操作；结束位置一般是数据被破坏或删除之前的位置。<br>登录MySQL后，查看binlog状态sql如下：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> variables <span class="keyword">like</span> <span class="string">&#x27;log_bin&#x27;</span>;</span><br></pre></td></tr></table></figure>
-<p><img src="/./img/mysql/mysql%E6%95%B0%E6%8D%AE%E5%A4%87%E4%BB%BD%E5%92%8C%E6%81%A2%E5%A4%8D/binlog%E7%8A%B6%E6%80%81.png"><br>如果log_bin的值为ON，则表示binlog功能已开启，如果为OFF，则需要先设置开启binlog功能：</p>
-<p>2.查看日志列表，得到当前的日志文件，日志文件名一般都是由XXX.number组成，number最大那个就是最新的日志文件</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> master logs;</span><br></pre></td></tr></table></figure>
-<p><img src="/./img/mysql/mysql%E6%95%B0%E6%8D%AE%E5%A4%87%E4%BB%BD%E5%92%8C%E6%81%A2%E5%A4%8D/%E6%97%A5%E5%BF%97%E5%88%97%E8%A1%A8.png"></p>
-<h3 id="模拟数据库误删除或损坏"><a href="#模拟数据库误删除或损坏" class="headerlink" title="模拟数据库误删除或损坏"></a>模拟数据库误删除或损坏</h3><p>开启binlog之后，创建测试数据库，在测试数据库中创建测试表，并写入数据：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> database test;</span><br><span class="line">use test;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `tb_test` (</span><br><span class="line">`id` <span class="type">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">`name` <span class="type">varchar</span>(<span class="number">255</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">`age` <span class="type">decimal</span>(<span class="number">18</span>,<span class="number">2</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line"><span class="keyword">PRIMARY</span> KEY (`id`)</span><br><span class="line">) ENGINE<span class="operator">=</span>InnoDB <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8mb4;</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> `tb_test`(`id`,`name`,`age`) <span class="keyword">values</span> (<span class="number">1</span>,<span class="string">&#x27;张三&#x27;</span>,<span class="number">24.00</span>);</span><br></pre></td></tr></table></figure>
-<p>此时假如误删了test数据库，就可以用binlog来进行回复数据库、库中的表及表中的数据；</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> database test;</span><br></pre></td></tr></table></figure>
-<h3 id="还原数据"><a href="#还原数据" class="headerlink" title="还原数据"></a>还原数据</h3><p>当需要恢复数据时，为了防止恢复数据后影响最新业务，需要执行flush logs，产生一个新的binlog文件，此时旧的binlog文件不会再有写入；定位好要恢复的数据所在的日志文件。<br>下面具体通过mysql-bin.000013来进行数据恢复，恢复时需要在binlog中找到两个位置：数据恢复的起始位置和结束位置，如在数据准备中的drop操作，需要在binlog中找到该位置，并将该位置作为数据恢复的结束位置。</p>
-<p>1.进入命令行，改变当前目录为MySQL安装目录下面的data目录，日志文件默认都放在这里。<br><img src="/./img/mysql/mysql%E6%95%B0%E6%8D%AE%E5%A4%87%E4%BB%BD%E5%92%8C%E6%81%A2%E5%A4%8D/%E5%9C%A8data%E6%96%87%E4%BB%B6%E4%B8%8B%E6%89%93%E5%BC%80%E5%91%BD%E4%BB%A4%E8%A1%8C.png" alt="在data目录下打开命令行"><br>2.通过命令查看当前的日志文件，得到日志文件名和位置。</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> MASTER LOGS;</span><br><span class="line"><span class="keyword">SHOW</span> binlog EVENTS <span class="keyword">IN</span> <span class="string">&#x27;zhongminghui.000026&#x27;</span>;</span><br></pre></td></tr></table></figure>
-<p><img src="/./img/mysql/mysql%E6%95%B0%E6%8D%AE%E5%A4%87%E4%BB%BD%E5%92%8C%E6%81%A2%E5%A4%8D/%E7%A1%AE%E5%AE%9A%E4%BD%8D%E7%BD%AE.png"><br>3.执行以下命令恢复数据</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">mysqlbinlog zhongminghui<span class="number">.000026</span> <span class="comment">--start-position=53118 --stop-position=53878 | mysql -u root -p</span></span><br></pre></td></tr></table></figure>
-<p><img src="/./img/mysql/mysql%E6%95%B0%E6%8D%AE%E5%A4%87%E4%BB%BD%E5%92%8C%E6%81%A2%E5%A4%8D/%E6%81%A2%E5%A4%8D%E6%95%B0%E6%8D%AE.png"></p>
-]]></content>
+<search> 
+  
+  
+    
+    <entry>
+      <title>xizhongte期末复习</title>
+      <link href="/2024/07/02/xizhongte/"/>
+      <url>/2024/07/02/xizhongte/</url>
+      
+        <content type="html"><![CDATA[<hr><h2 id="一-如何理解“两个确立”的决定性意义？"><a href="#一-如何理解“两个确立”的决定性意义？" class="headerlink" title="一.如何理解“两个确立”的决定性意义？"></a>一.如何理解“两个确立”的决定性意义？</h2><ol><li>党确立习近平同志党中央的核心、全党的核心地位。</li><li>确立习近平新时代中国特色社会主义思想的指导地位。</li></ol><hr><h2 id="二-为什么说习近平新时代中国特色社会主义思想是“两个结合”的重大成果？"><a href="#二-为什么说习近平新时代中国特色社会主义思想是“两个结合”的重大成果？" class="headerlink" title="二.为什么说习近平新时代中国特色社会主义思想是“两个结合”的重大成果？"></a>二.为什么说习近平新时代中国特色社会主义思想是“两个结合”的重大成果？</h2><ol><li>习近平新时代中国特色社会主义思想坚持把马克思主义基本原理同中国具体实际相结合。</li><li>习近平新时代中国特色社会主义思想坚持把马克思主义基本原理同中华优秀传统文化相结合。</li></ol><hr><h2 id="三-如何理解中国特色社会主义新时代是我国发展新的历史方位？"><a href="#三-如何理解中国特色社会主义新时代是我国发展新的历史方位？" class="headerlink" title="三.如何理解中国特色社会主义新时代是我国发展新的历史方位？"></a>三.如何理解中国特色社会主义新时代是我国发展新的历史方位？</h2><ol><li>中国特色社会主义是承前启后、继往开来的新时代。</li><li>是全面建成小康社会进而全面建设社会主义现代化强国的时代。</li><li>是我国人民不断奋斗逐步实现全体人民共同富裕的时代。</li><li>是全体中华儿女奋力实现中华民族伟大复兴中国梦的时代。</li><li>是我国不断为人类做出巨大贡献的时代。</li><li>为解决人类问题贡献了中国智慧和中国方案。</li></ol><hr><h2 id="四-为什么说中国特色社会主义是社会主义而不是其他的什么主义？"><a href="#四-为什么说中国特色社会主义是社会主义而不是其他的什么主义？" class="headerlink" title="四.为什么说中国特色社会主义是社会主义而不是其他的什么主义？"></a>四.为什么说中国特色社会主义是社会主义而不是其他的什么主义？</h2><ol><li>中国特色社会主义是科学社会主义理论逻辑和中国社会发展历史逻辑的辩证统一。</li><li>中国特色社会主义坚持了科学社会主义基本原则。</li><li>中国特色社会主义写出了科学社会主义的“新版本”。</li></ol><hr><h2 id="五-中国式现代化的中国特色体现在哪些方面？"><a href="#五-中国式现代化的中国特色体现在哪些方面？" class="headerlink" title="五.中国式现代化的中国特色体现在哪些方面？"></a>五.中国式现代化的中国特色体现在哪些方面？</h2><ol><li>中国式现代化是人口规模巨大的现代化。</li><li>中国式现代化是全体人民共同富裕的现代化。</li><li>中国式现代化是物质文明和精神文明相协调的现代化。</li><li>中国式现代化是人与自然和谐共生的现代化。</li><li>中国式现代化是走和平发展道路的现代化</li></ol><hr><h2 id="六-为什么说中国式现代化创造了人类文明新形态？"><a href="#六-为什么说中国式现代化创造了人类文明新形态？" class="headerlink" title="六.为什么说中国式现代化创造了人类文明新形态？"></a>六.为什么说中国式现代化创造了人类文明新形态？</h2><ol><li>中国式现代化提供了一种全新的现代化模式。</li><li>中国式现代化是对西方式现代化理论和实践的重大超越。</li><li>中国式现代化为广大发展中国家提供了全新选择。</li></ol><hr><h2 id="七-如何理解中国共产党领导是中国特色社会主义最本质的特征？"><a href="#七-如何理解中国共产党领导是中国特色社会主义最本质的特征？" class="headerlink" title="七.如何理解中国共产党领导是中国特色社会主义最本质的特征？"></a>七.如何理解中国共产党领导是中国特色社会主义最本质的特征？</h2><ol><li>中国最大的国情就是中国共产党的领导。</li><li>中国共产党领导是中国特色社会主义制度的最大优势。</li><li>加强党的全面领导为新时代党和国家事业发展提供了坚强保证。</li></ol><hr><h2 id="八-怎样理解党的领导是全面的、系统的、整体的？"><a href="#八-怎样理解党的领导是全面的、系统的、整体的？" class="headerlink" title="八.怎样理解党的领导是全面的、系统的、整体的？"></a>八.怎样理解党的领导是全面的、系统的、整体的？</h2><ol><li>党的领导是全面的，党对国家和社会的领导涉及各个领域和方面，确保党的领导全覆盖。</li><li>党的领导是系统的，这体现在党通过制定和实施一系列科学的政策和战略，来推动国家和社会的发展。</li><li>党的领导是整体的，这意味着党的领导不是零散的、局部的，而是从整体利益出发，统筹兼顾各个地区和各方面的利益。</li><li>党的领导是全面的、系统的、整体的，并不是说党组织包办一切，而是在各级各种组织中发挥领导核心作用，使党的领导作用贯穿于工作全过程。</li></ol><hr><h2 id="九-“江山就是人民，人民就是江山”的深刻内涵是什么？"><a href="#九-“江山就是人民，人民就是江山”的深刻内涵是什么？" class="headerlink" title="九.“江山就是人民，人民就是江山”的深刻内涵是什么？"></a>九.“江山就是人民，人民就是江山”的深刻内涵是什么？</h2><ol><li>人民是历史的创造者，是真正的英雄。</li><li>打江山、守江山，守的是人民的心。</li><li>人民立场是中国共产党的根本政治立场。</li></ol><hr><h2 id="十-为什么要推动全体人民共同富裕取得更为明显的实质性进展？"><a href="#十-为什么要推动全体人民共同富裕取得更为明显的实质性进展？" class="headerlink" title="十.为什么要推动全体人民共同富裕取得更为明显的实质性进展？"></a>十.为什么要推动全体人民共同富裕取得更为明显的实质性进展？</h2><ol><li>共同富裕是中国特色社会主义的本质要求，是中国式现代化的重要特征。</li><li>实现共同富裕不仅是经济问题，而且是关系党的执政基础的重大政治问题。</li><li>要从全局角度来把握共同富裕。</li><li>扎实推进共同富裕，必须坚持正确的原则和科学的思路。</li><li>推动全体人民共同富裕与促进人的全面发展是高度一致的。</li></ol><hr><h2 id="十一-如何大力推动构建新发展格局？"><a href="#十一-如何大力推动构建新发展格局？" class="headerlink" title="十一.如何大力推动构建新发展格局？"></a>十一.如何大力推动构建新发展格局？</h2><ol><li>着力推动实施扩大内需战略同深化供给侧结构性改革有机结合。</li><li>着力发展实体经济。</li><li>着力加快科技自立自强。</li><li>着力推动产业链供应链优化升级。</li></ol><hr><h2 id="十二-如何理解加快构建新发展格局的必然性？"><a href="#十二-如何理解加快构建新发展格局的必然性？" class="headerlink" title="十二.如何理解加快构建新发展格局的必然性？"></a>十二.如何理解加快构建新发展格局的必然性？</h2><ol><li>构建新发展格局是事关全局的必然性、深层次变革，是立足当前着眼长远的战略谋划，是适应我国发展新阶段要求、提高国际竞争力的的必然选择。</li><li>构建新发展格局是把握未来发展主动权的先手棋，不是被迫之举和权宜之计。</li><li>构建新发展格局是开放的国内国际双循环，不是封闭的国内单循环。</li><li>构建新发展格局是以全国统一大市场基础上的国内大循环为主体，不是各地都搞自我小循环。</li></ol><hr><h2 id="十三-如何认识全过程人民民主是全链条、全方位、全覆盖的民主？"><a href="#十三-如何认识全过程人民民主是全链条、全方位、全覆盖的民主？" class="headerlink" title="十三.如何认识全过程人民民主是全链条、全方位、全覆盖的民主？"></a>十三.如何认识全过程人民民主是全链条、全方位、全覆盖的民主？</h2><ol><li>全过程民主是全链条的民主，在民主选举环节，人民通过选举、投票行使权力，选出代表自己意愿的人来掌握并行使权力。</li><li>全过程民主是全方位的民主，全过程人民民主贯通国家政治生活和社会生活各层面各维度。</li><li>全过程民主是全覆盖的民主，全过程人民民主涵盖国家各项事业各项工作，贯穿“五位一体”总体布局和“四个全面”战略布局的方方面面，是各方面民主的有机统一。</li></ol><hr><h2 id="十四-为什么说全过程人民民主是最广泛、最真实、最管用的民主？"><a href="#十四-为什么说全过程人民民主是最广泛、最真实、最管用的民主？" class="headerlink" title="十四.为什么说全过程人民民主是最广泛、最真实、最管用的民主？"></a>十四.为什么说全过程人民民主是最广泛、最真实、最管用的民主？</h2><ol><li>全过程人民民主是最广泛的民主，我国宪法规定，国家的一切权力属于人民。</li><li>全过程人民民主是最真实的民主，全过程人民民主把党的主张、国家意志、人民意愿紧密融合在一起，充分彰显了人民的主体地位，彰显了人民民主的真实性。</li><li>全过程人民民主是最管用的民主，习近平指出：“民主不是装饰品，不是用来做摆设的，而是要用来解决人民要解决的问题。”全过程人民民主体现了社会主义民主的优势，保证在党的领导下有效治理国家。</li></ol><hr><h2 id="十五-为什么要坚持马克思主义在意识形态领域指导地位的根本制度？"><a href="#十五-为什么要坚持马克思主义在意识形态领域指导地位的根本制度？" class="headerlink" title="十五.为什么要坚持马克思主义在意识形态领域指导地位的根本制度？"></a>十五.为什么要坚持马克思主义在意识形态领域指导地位的根本制度？</h2><ol><li>马克思主义是我们立党立国、兴党兴国的根本指导思想。</li><li>坚持马克思主义在意识形态领域指导地位的根本制度是历史的结论。</li><li>坚持马克思主义在意识形态领域指导地位的根本制度，是坚持和巩固我国社会主义制度、保证我国文化建设正确方向的必然要求。</li></ol><hr><h2 id="十六-为什么要积极塑造主流舆论新格局？"><a href="#十六-为什么要积极塑造主流舆论新格局？" class="headerlink" title="十六.为什么要积极塑造主流舆论新格局？"></a>十六.为什么要积极塑造主流舆论新格局？</h2><ol><li>新闻舆论工作处在意识形态斗争前沿，是治国理政、定国安邦的大事。</li><li>新闻舆论工作有鲜明的意识形态属性，坚持正确的政治方向是做好新闻舆论工作的第一要求。</li><li>新闻媒体是社会舆论的发射器和放大器，做大做强主流舆论阵地，对推进社会主义现代化事业的顺利发展具有重要意义。</li><li>互联网是意识形态工作的主阵地、主战场、最前沿，管好用好互联网是新形势下做好新闻舆论工作的关键。</li></ol><hr><h2 id="十七-绿水青山就是金山银山的科学内涵是什么？"><a href="#十七-绿水青山就是金山银山的科学内涵是什么？" class="headerlink" title="十七.绿水青山就是金山银山的科学内涵是什么？"></a>十七.绿水青山就是金山银山的科学内涵是什么？</h2><ol><li>二者是辩证统一、相辅相成的关系。</li><li>坚持在发展中保护、在保护中发展。</li><li>我们既要绿水青山，也要金山银山，宁要绿水青山，不要金山银山，而且绿水青山就是金山银山。</li></ol><hr><h2 id="十八-怎样建设美丽中国？"><a href="#十八-怎样建设美丽中国？" class="headerlink" title="十八.怎样建设美丽中国？"></a>十八.怎样建设美丽中国？</h2><ol><li>加快形成绿色生产方式和生活方式。</li><li>坚持山水林田湖草沙一体化保护和系统治理。</li><li>用最严格制度最严密法治保护生态环境。</li></ol><hr><h2 id="十九-如何准确把握“一国”和“两制”的科学内涵？"><a href="#十九-如何准确把握“一国”和“两制”的科学内涵？" class="headerlink" title="十九.如何准确把握“一国”和“两制”的科学内涵？"></a>十九.如何准确把握“一国”和“两制”的科学内涵？</h2><ol><li>牢牢把握“一国两制”维护国家主权、安全、发展利益，保持香港、澳门长期繁荣稳定的根本宗旨。</li><li>准确把握“一国”和“两制”的关系，“一国”是实行“两制”的前提和基础，“两制”从属和派生于“一国”，并统一于“一国”之内。</li><li>坚持中央全面管治权和保障特别行政区高度自治权相统一。</li><li>坚持落实“爱国者治港”“爱国者治澳”原则。</li><li>坚持依法治港治澳，依法治理是最可靠、最稳定的治理。</li></ol><hr><h2 id="二十-为什么说祖国完全统一一定要实现，也一定能够实现？"><a href="#二十-为什么说祖国完全统一一定要实现，也一定能够实现？" class="headerlink" title="二十.为什么说祖国完全统一一定要实现，也一定能够实现？"></a>二十.为什么说祖国完全统一一定要实现，也一定能够实现？</h2><ol><li>实现祖国完全统一是由中华民族伟大复兴的时和势决定的，是不可阻挡的历史潮流。</li><li>民族复兴、国家统一是大势所趋、大义所在、民心所向。</li><li>台湾前途在于国家统一，台湾同胞福祉系于民族复兴。</li><li>统一是历史大势，在正道，“台独”是历史逆流，是绝路。</li></ol><hr><h2 id="二十一-如何认识中国必须有自己特色的大国外交？"><a href="#二十一-如何认识中国必须有自己特色的大国外交？" class="headerlink" title="二十一.如何认识中国必须有自己特色的大国外交？"></a>二十一.如何认识中国必须有自己特色的大国外交？</h2><ol><li>当代中国与外部世界的关系正在发生历史性变化，我国同国际社会的互联互动变得空前紧密。</li><li>中国特色大国外交建立在正确的历史观、大局观、角色观基础之上。</li><li>中国特色大国外交牢牢把握服务民族复兴、促进人类进步这条主线。</li><li>中国特色大国外交坚持正确的原则要求。</li><li>中国特色大国外交展现独特风范。</li></ol><hr><h2 id="二十二-如何推动构建新型国际关系？"><a href="#二十二-如何推动构建新型国际关系？" class="headerlink" title="二十二.如何推动构建新型国际关系？"></a>二十二.如何推动构建新型国际关系？</h2><ol><li>推动构建新型国际关系，就是要秉持相互尊重、公平正义、合作共赢原则，走出一条对话而不对抗、结伴而不结盟的国与国交往新路。</li><li>推进大国协调合作，构建和平共处、总体稳定、均衡发展的大国关系格局。</li><li>坚持亲诚惠容和与邻为善、以邻为伴的周边外交方针，深化同周边国家友好互信和利益融合。</li><li>秉持真实亲诚理念和正确义利观，加强同发展中国家团结合作。</li><li>秉持求同存异、相互尊重、互学互鉴理念，构建新型政党关系。</li></ol><hr><h2 id="二十三-为什么要把党的政治建设摆在首位？"><a href="#二十三-为什么要把党的政治建设摆在首位？" class="headerlink" title="二十三.为什么要把党的政治建设摆在首位？"></a>二十三.为什么要把党的政治建设摆在首位？</h2><ol><li>党的政治建设是党的根本性建设。</li><li>旗帜鲜明讲政治是我们党作为马克思主义政党的根本要求。</li><li>保证全党服从中央，维护党中央权威和集中统一领导，是党的政治建设的首要任务。</li><li>发挥党的政治建设的统领性作用，必须把准政治方向、站稳政治立场、营造良好政治生态、提高政治能力。</li></ol><hr><h2 id="二十四-如何理解党的自我革命是跳出历史周期率的第二个答案？"><a href="#二十四-如何理解党的自我革命是跳出历史周期率的第二个答案？" class="headerlink" title="二十四.如何理解党的自我革命是跳出历史周期率的第二个答案？"></a>二十四.如何理解党的自我革命是跳出历史周期率的第二个答案？</h2><ol><li>勇于自我革命，是中国共产党区别于其他政党的显著标志，也是我们党最大的优势、最鲜明的品格。</li><li>勇于自我革命就要同一切影响党的先进性、弱化党的纯洁性的问题作坚决斗争，实现自我净化、自我完善、自我革新、自我提高。</li><li>我们党成立以来，外靠发展人民民主、接受人民监督，内靠全面从严治党、推进自我革命，保证了党长盛不衰、不断发展壮大。</li></ol><hr><img src="https://wimg.588ku.com/gif/21/10/14/38f49e13b491d9c315d4071023560d3f.gif">]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>mysql数据备份和恢复</title>
+      <link href="/2024/06/27/mysql/mysql%E6%95%B0%E6%8D%AE%E5%A4%87%E4%BB%BD%E5%92%8C%E6%81%A2%E5%A4%8D/"/>
+      <url>/2024/06/27/mysql/mysql%E6%95%B0%E6%8D%AE%E5%A4%87%E4%BB%BD%E5%92%8C%E6%81%A2%E5%A4%8D/</url>
+      
+        <content type="html"><![CDATA[<h1 id="MySQL数据备份和恢复"><a href="#MySQL数据备份和恢复" class="headerlink" title="MySQL数据备份和恢复"></a>MySQL数据备份和恢复</h1><p><strong>为了让MySQL操作更简便，可以参考<a href="https://blog.csdn.net/qq_52853542/article/details/124669072">CSDN环境变量教程</a>配置MySQL的环境变量,这样在命令行的任何位置都可以执行MySQL的命令。</strong></p><h2 id="备份单个数据库"><a href="#备份单个数据库" class="headerlink" title="备份单个数据库"></a>备份单个数据库</h2><h3 id="备份单个数据库study，不包含创建数据库的语句，恢复时需要先创建study数据库"><a href="#备份单个数据库study，不包含创建数据库的语句，恢复时需要先创建study数据库" class="headerlink" title="备份单个数据库study，不包含创建数据库的语句，恢复时需要先创建study数据库"></a>备份单个数据库study，不包含创建数据库的语句，恢复时需要先创建study数据库</h3><ol><li>备份study数据库<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump <span class="operator">-</span>u root <span class="operator">-</span>p study <span class="operator">&gt;</span> d:\study.sql</span><br></pre></td></tr></table></figure>2.恢复study数据库<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql <span class="operator">-</span>u root <span class="operator">-</span>p <span class="operator">-</span>e &quot;create database study&quot;</span><br><span class="line">mysql <span class="operator">-</span>u root <span class="operator">-</span>p study <span class="operator">&lt;</span> d:\study.sql</span><br></pre></td></tr></table></figure></li></ol><h3 id="备份单个数据库study，包含创建数据库语句"><a href="#备份单个数据库study，包含创建数据库语句" class="headerlink" title="备份单个数据库study，包含创建数据库语句"></a>备份单个数据库study，包含创建数据库语句</h3><ol><li>备份study数据库<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump <span class="operator">-</span>u root <span class="operator">-</span>p <span class="comment">--databases study &gt; d:\study.sql</span></span><br></pre></td></tr></table></figure></li><li>恢复study数据库<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql <span class="operator">-</span>u root <span class="operator">-</span>p <span class="operator">&lt;</span> d:\study.sql</span><br></pre></td></tr></table></figure></li></ol><h2 id="备份整个MySQL数据库"><a href="#备份整个MySQL数据库" class="headerlink" title="备份整个MySQL数据库"></a>备份整个MySQL数据库</h2><h3 id="备份整个MySQL数据库，包含系统数据库"><a href="#备份整个MySQL数据库，包含系统数据库" class="headerlink" title="备份整个MySQL数据库，包含系统数据库"></a>备份整个MySQL数据库，包含系统数据库</h3><ol><li>备份整个MySQL数据库<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump <span class="operator">-</span>u root <span class="operator">-</span>p <span class="comment">--all-databases  &gt; d:\all.sql</span></span><br></pre></td></tr></table></figure></li><li>恢复整个MySQL数据库<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql <span class="operator">-</span>u root <span class="operator">-</span>p <span class="operator">&lt;</span> d:\all.sql</span><br></pre></td></tr></table></figure></li></ol><h3 id="备份指定数据库的表，如study数据库里面的staff表"><a href="#备份指定数据库的表，如study数据库里面的staff表" class="headerlink" title="备份指定数据库的表，如study数据库里面的staff表"></a>备份指定数据库的表，如study数据库里面的staff表</h3><ol><li>备份指定数据库的表<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump <span class="operator">-</span>u root <span class="operator">-</span>p study staff <span class="operator">&gt;</span> d:\study_staff.sql</span><br></pre></td></tr></table></figure></li><li>恢复指定数据库的表<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql <span class="operator">-</span>u root <span class="operator">-</span>p study <span class="operator">&lt;</span> d:\study_staff.sql</span><br></pre></td></tr></table></figure></li></ol><h1 id="数据未备份如何恢复"><a href="#数据未备份如何恢复" class="headerlink" title="数据未备份如何恢复"></a>数据未备份如何恢复</h1><h2 id="使用mysqlbinlog恢复数据"><a href="#使用mysqlbinlog恢复数据" class="headerlink" title="使用mysqlbinlog恢复数据"></a>使用mysqlbinlog恢复数据</h2><h3 id="数据恢复前的准备"><a href="#数据恢复前的准备" class="headerlink" title="数据恢复前的准备"></a>数据恢复前的准备</h3><p>1.MySQL安装完成后， MySQL8默认开启binlog；当数据库发生变化时，binlog会记录数据库中的所有变化；需要恢复的时候可以根据binlog中的开始位置和结束位置还原本部分操作；结束位置一般是数据被破坏或删除之前的位置。<br>登录MySQL后，查看binlog状态sql如下：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> variables <span class="keyword">like</span> <span class="string">&#x27;log_bin&#x27;</span>;</span><br></pre></td></tr></table></figure><p><img src="/./img/mysql/mysql%E6%95%B0%E6%8D%AE%E5%A4%87%E4%BB%BD%E5%92%8C%E6%81%A2%E5%A4%8D/binlog%E7%8A%B6%E6%80%81.png"><br>如果log_bin的值为ON，则表示binlog功能已开启，如果为OFF，则需要先设置开启binlog功能：</p><p>2.查看日志列表，得到当前的日志文件，日志文件名一般都是由XXX.number组成，number最大那个就是最新的日志文件</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> master logs;</span><br></pre></td></tr></table></figure><p><img src="/./img/mysql/mysql%E6%95%B0%E6%8D%AE%E5%A4%87%E4%BB%BD%E5%92%8C%E6%81%A2%E5%A4%8D/%E6%97%A5%E5%BF%97%E5%88%97%E8%A1%A8.png"></p><h3 id="模拟数据库误删除或损坏"><a href="#模拟数据库误删除或损坏" class="headerlink" title="模拟数据库误删除或损坏"></a>模拟数据库误删除或损坏</h3><p>开启binlog之后，创建测试数据库，在测试数据库中创建测试表，并写入数据：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> database test;</span><br><span class="line">use test;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `tb_test` (</span><br><span class="line">`id` <span class="type">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">`name` <span class="type">varchar</span>(<span class="number">255</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">`age` <span class="type">decimal</span>(<span class="number">18</span>,<span class="number">2</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line"><span class="keyword">PRIMARY</span> KEY (`id`)</span><br><span class="line">) ENGINE<span class="operator">=</span>InnoDB <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8mb4;</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> `tb_test`(`id`,`name`,`age`) <span class="keyword">values</span> (<span class="number">1</span>,<span class="string">&#x27;张三&#x27;</span>,<span class="number">24.00</span>);</span><br></pre></td></tr></table></figure><p>此时假如误删了test数据库，就可以用binlog来进行回复数据库、库中的表及表中的数据；</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> database test;</span><br></pre></td></tr></table></figure><h3 id="还原数据"><a href="#还原数据" class="headerlink" title="还原数据"></a>还原数据</h3><p>当需要恢复数据时，为了防止恢复数据后影响最新业务，需要执行flush logs，产生一个新的binlog文件，此时旧的binlog文件不会再有写入；定位好要恢复的数据所在的日志文件。<br>下面具体通过mysql-bin.000013来进行数据恢复，恢复时需要在binlog中找到两个位置：数据恢复的起始位置和结束位置，如在数据准备中的drop操作，需要在binlog中找到该位置，并将该位置作为数据恢复的结束位置。</p><p>1.进入命令行，改变当前目录为MySQL安装目录下面的data目录，日志文件默认都放在这里。<br><img src="/./img/mysql/mysql%E6%95%B0%E6%8D%AE%E5%A4%87%E4%BB%BD%E5%92%8C%E6%81%A2%E5%A4%8D/%E5%9C%A8data%E6%96%87%E4%BB%B6%E4%B8%8B%E6%89%93%E5%BC%80%E5%91%BD%E4%BB%A4%E8%A1%8C.png" alt="在data目录下打开命令行"><br>2.通过命令查看当前的日志文件，得到日志文件名和位置。</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> MASTER LOGS;</span><br><span class="line"><span class="keyword">SHOW</span> binlog EVENTS <span class="keyword">IN</span> <span class="string">&#x27;zhongminghui.000026&#x27;</span>;</span><br></pre></td></tr></table></figure><p><img src="/./img/mysql/mysql%E6%95%B0%E6%8D%AE%E5%A4%87%E4%BB%BD%E5%92%8C%E6%81%A2%E5%A4%8D/%E7%A1%AE%E5%AE%9A%E4%BD%8D%E7%BD%AE.png"><br>3.执行以下命令恢复数据</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqlbinlog zhongminghui<span class="number">.000026</span> <span class="comment">--start-position=53118 --stop-position=53878 | mysql -u root -p</span></span><br></pre></td></tr></table></figure><p><img src="/./img/mysql/mysql%E6%95%B0%E6%8D%AE%E5%A4%87%E4%BB%BD%E5%92%8C%E6%81%A2%E5%A4%8D/%E6%81%A2%E5%A4%8D%E6%95%B0%E6%8D%AE.png"></p>]]></content>
+      
+      
       <categories>
-        <category>mysql</category>
+          
+          <category> mysql </category>
+          
       </categories>
-      <tags>
-        <tag>mysql</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>xizhongte期末复习</title>
-    <url>/2024/07/02/xizhongte/</url>
-    <content><![CDATA[<hr>
-<h2 id="一-如何理解“两个确立”的决定性意义？"><a href="#一-如何理解“两个确立”的决定性意义？" class="headerlink" title="一.如何理解“两个确立”的决定性意义？"></a>一.如何理解“两个确立”的决定性意义？</h2><ol>
-<li>党确立习近平同志党中央的核心、全党的核心地位。</li>
-<li>确立习近平新时代中国特色社会主义思想的指导地位。</li>
-</ol>
-<hr>
-<h2 id="二-为什么说习近平新时代中国特色社会主义思想是“两个结合”的重大成果？"><a href="#二-为什么说习近平新时代中国特色社会主义思想是“两个结合”的重大成果？" class="headerlink" title="二.为什么说习近平新时代中国特色社会主义思想是“两个结合”的重大成果？"></a>二.为什么说习近平新时代中国特色社会主义思想是“两个结合”的重大成果？</h2><ol>
-<li>习近平新时代中国特色社会主义思想坚持把马克思主义基本原理同中国具体实际相结合。</li>
-<li>习近平新时代中国特色社会主义思想坚持把马克思主义基本原理同中华优秀传统文化相结合。</li>
-</ol>
-<hr>
-<h2 id="三-如何理解中国特色社会主义新时代是我国发展新的历史方位？"><a href="#三-如何理解中国特色社会主义新时代是我国发展新的历史方位？" class="headerlink" title="三.如何理解中国特色社会主义新时代是我国发展新的历史方位？"></a>三.如何理解中国特色社会主义新时代是我国发展新的历史方位？</h2><ol>
-<li>中国特色社会主义是承前启后、继往开来的新时代。</li>
-<li>是全面建成小康社会进而全面建设社会主义现代化强国的时代。</li>
-<li>是我国人民不断奋斗逐步实现全体人民共同富裕的时代。</li>
-<li>是全体中华儿女奋力实现中华民族伟大复兴中国梦的时代。</li>
-<li>是我国不断为人类做出巨大贡献的时代。</li>
-<li>为解决人类问题贡献了中国智慧和中国方案。</li>
-</ol>
-<hr>
-<h2 id="四-为什么说中国特色社会主义是社会主义而不是其他的什么主义？"><a href="#四-为什么说中国特色社会主义是社会主义而不是其他的什么主义？" class="headerlink" title="四.为什么说中国特色社会主义是社会主义而不是其他的什么主义？"></a>四.为什么说中国特色社会主义是社会主义而不是其他的什么主义？</h2><ol>
-<li>中国特色社会主义是科学社会主义理论逻辑和中国社会发展历史逻辑的辩证统一。</li>
-<li>中国特色社会主义坚持了科学社会主义基本原则。</li>
-<li>中国特色社会主义写出了科学社会主义的“新版本”。</li>
-</ol>
-<hr>
-<h2 id="五-中国式现代化的中国特色体现在哪些方面？"><a href="#五-中国式现代化的中国特色体现在哪些方面？" class="headerlink" title="五.中国式现代化的中国特色体现在哪些方面？"></a>五.中国式现代化的中国特色体现在哪些方面？</h2><ol>
-<li>中国式现代化是人口规模巨大的现代化。</li>
-<li>中国式现代化是全体人民共同富裕的现代化。</li>
-<li>中国式现代化是物质文明和精神文明相协调的现代化。</li>
-<li>中国式现代化是人与自然和谐共生的现代化。</li>
-<li>中国式现代化是走和平发展道路的现代化</li>
-</ol>
-<hr>
-<h2 id="六-为什么说中国式现代化创造了人类文明新形态？"><a href="#六-为什么说中国式现代化创造了人类文明新形态？" class="headerlink" title="六.为什么说中国式现代化创造了人类文明新形态？"></a>六.为什么说中国式现代化创造了人类文明新形态？</h2><ol>
-<li>中国式现代化提供了一种全新的现代化模式。</li>
-<li>中国式现代化是对西方式现代化理论和实践的重大超越。</li>
-<li>中国式现代化为广大发展中国家提供了全新选择。</li>
-</ol>
-<hr>
-<h2 id="七-如何理解中国共产党领导是中国特色社会主义最本质的特征？"><a href="#七-如何理解中国共产党领导是中国特色社会主义最本质的特征？" class="headerlink" title="七.如何理解中国共产党领导是中国特色社会主义最本质的特征？"></a>七.如何理解中国共产党领导是中国特色社会主义最本质的特征？</h2><ol>
-<li>中国最大的国情就是中国共产党的领导。</li>
-<li>中国共产党领导是中国特色社会主义制度的最大优势。</li>
-<li>加强党的全面领导为新时代党和国家事业发展提供了坚强保证。</li>
-</ol>
-<hr>
-<h2 id="八-怎样理解党的领导是全面的、系统的、整体的？"><a href="#八-怎样理解党的领导是全面的、系统的、整体的？" class="headerlink" title="八.怎样理解党的领导是全面的、系统的、整体的？"></a>八.怎样理解党的领导是全面的、系统的、整体的？</h2><ol>
-<li>党的领导是全面的，党对国家和社会的领导涉及各个领域和方面，确保党的领导全覆盖。</li>
-<li>党的领导是系统的，这体现在党通过制定和实施一系列科学的政策和战略，来推动国家和社会的发展。</li>
-<li>党的领导是整体的，这意味着党的领导不是零散的、局部的，而是从整体利益出发，统筹兼顾各个地区和各方面的利益。</li>
-<li>党的领导是全面的、系统的、整体的，并不是说党组织包办一切，而是在各级各种组织中发挥领导核心作用，使党的领导作用贯穿于工作全过程。</li>
-</ol>
-<hr>
-<h2 id="九-“江山就是人民，人民就是江山”的深刻内涵是什么？"><a href="#九-“江山就是人民，人民就是江山”的深刻内涵是什么？" class="headerlink" title="九.“江山就是人民，人民就是江山”的深刻内涵是什么？"></a>九.“江山就是人民，人民就是江山”的深刻内涵是什么？</h2><ol>
-<li>人民是历史的创造者，是真正的英雄。</li>
-<li>打江山、守江山，守的是人民的心。</li>
-<li>人民立场是中国共产党的根本政治立场。</li>
-</ol>
-<hr>
-<h2 id="十-为什么要推动全体人民共同富裕取得更为明显的实质性进展？"><a href="#十-为什么要推动全体人民共同富裕取得更为明显的实质性进展？" class="headerlink" title="十.为什么要推动全体人民共同富裕取得更为明显的实质性进展？"></a>十.为什么要推动全体人民共同富裕取得更为明显的实质性进展？</h2><ol>
-<li>共同富裕是中国特色社会主义的本质要求，是中国式现代化的重要特征。</li>
-<li>实现共同富裕不仅是经济问题，而且是关系党的执政基础的重大政治问题。</li>
-<li>要从全局角度来把握共同富裕。</li>
-<li>扎实推进共同富裕，必须坚持正确的原则和科学的思路。</li>
-<li>推动全体人民共同富裕与促进人的全面发展是高度一致的。</li>
-</ol>
-<hr>
-<h2 id="十一-如何大力推动构建新发展格局？"><a href="#十一-如何大力推动构建新发展格局？" class="headerlink" title="十一.如何大力推动构建新发展格局？"></a>十一.如何大力推动构建新发展格局？</h2><ol>
-<li>着力推动实施扩大内需战略同深化供给侧结构性改革有机结合。</li>
-<li>着力发展实体经济。</li>
-<li>着力加快科技自立自强。</li>
-<li>着力推动产业链供应链优化升级。</li>
-</ol>
-<hr>
-<h2 id="十二-如何理解加快构建新发展格局的必然性？"><a href="#十二-如何理解加快构建新发展格局的必然性？" class="headerlink" title="十二.如何理解加快构建新发展格局的必然性？"></a>十二.如何理解加快构建新发展格局的必然性？</h2><ol>
-<li>构建新发展格局是事关全局的必然性、深层次变革，是立足当前着眼长远的战略谋划，是适应我国发展新阶段要求、提高国际竞争力的的必然选择。</li>
-<li>构建新发展格局是把握未来发展主动权的先手棋，不是被迫之举和权宜之计。</li>
-<li>构建新发展格局是开放的国内国际双循环，不是封闭的国内单循环。</li>
-<li>构建新发展格局是以全国统一大市场基础上的国内大循环为主体，不是各地都搞自我小循环。</li>
-</ol>
-<hr>
-<h2 id="十三-如何认识全过程人民民主是全链条、全方位、全覆盖的民主？"><a href="#十三-如何认识全过程人民民主是全链条、全方位、全覆盖的民主？" class="headerlink" title="十三.如何认识全过程人民民主是全链条、全方位、全覆盖的民主？"></a>十三.如何认识全过程人民民主是全链条、全方位、全覆盖的民主？</h2><ol>
-<li>全过程民主是全链条的民主，在民主选举环节，人民通过选举、投票行使权力，选出代表自己意愿的人来掌握并行使权力。</li>
-<li>全过程民主是全方位的民主，全过程人民民主贯通国家政治生活和社会生活各层面各维度。</li>
-<li>全过程民主是全覆盖的民主，全过程人民民主涵盖国家各项事业各项工作，贯穿“五位一体”总体布局和“四个全面”战略布局的方方面面，是各方面民主的有机统一。</li>
-</ol>
-<hr>
-<h2 id="十四-为什么说全过程人民民主是最广泛、最真实、最管用的民主？"><a href="#十四-为什么说全过程人民民主是最广泛、最真实、最管用的民主？" class="headerlink" title="十四.为什么说全过程人民民主是最广泛、最真实、最管用的民主？"></a>十四.为什么说全过程人民民主是最广泛、最真实、最管用的民主？</h2><ol>
-<li>全过程人民民主是最广泛的民主，我国宪法规定，国家的一切权力属于人民。</li>
-<li>全过程人民民主是最真实的民主，全过程人民民主把党的主张、国家意志、人民意愿紧密融合在一起，充分彰显了人民的主体地位，彰显了人民民主的真实性。</li>
-<li>全过程人民民主是最管用的民主，习近平指出：“民主不是装饰品，不是用来做摆设的，而是要用来解决人民要解决的问题。”全过程人民民主体现了社会主义民主的优势，保证在党的领导下有效治理国家。</li>
-</ol>
-<hr>
-<h2 id="十五-为什么要坚持马克思主义在意识形态领域指导地位的根本制度？"><a href="#十五-为什么要坚持马克思主义在意识形态领域指导地位的根本制度？" class="headerlink" title="十五.为什么要坚持马克思主义在意识形态领域指导地位的根本制度？"></a>十五.为什么要坚持马克思主义在意识形态领域指导地位的根本制度？</h2><ol>
-<li>马克思主义是我们立党立国、兴党兴国的根本指导思想。</li>
-<li>坚持马克思主义在意识形态领域指导地位的根本制度是历史的结论。</li>
-<li>坚持马克思主义在意识形态领域指导地位的根本制度，是坚持和巩固我国社会主义制度、保证我国文化建设正确方向的必然要求。</li>
-</ol>
-<hr>
-<h2 id="十六-为什么要积极塑造主流舆论新格局？"><a href="#十六-为什么要积极塑造主流舆论新格局？" class="headerlink" title="十六.为什么要积极塑造主流舆论新格局？"></a>十六.为什么要积极塑造主流舆论新格局？</h2><ol>
-<li>新闻舆论工作处在意识形态斗争前沿，是治国理政、定国安邦的大事。</li>
-<li>新闻舆论工作有鲜明的意识形态属性，坚持正确的政治方向是做好新闻舆论工作的第一要求。</li>
-<li>新闻媒体是社会舆论的发射器和放大器，做大做强主流舆论阵地，对推进社会主义现代化事业的顺利发展具有重要意义。</li>
-<li>互联网是意识形态工作的主阵地、主战场、最前沿，管好用好互联网是新形势下做好新闻舆论工作的关键。</li>
-</ol>
-<hr>
-<h2 id="十七-绿水青山就是金山银山的科学内涵是什么？"><a href="#十七-绿水青山就是金山银山的科学内涵是什么？" class="headerlink" title="十七.绿水青山就是金山银山的科学内涵是什么？"></a>十七.绿水青山就是金山银山的科学内涵是什么？</h2><ol>
-<li>二者是辩证统一、相辅相成的关系。</li>
-<li>坚持在发展中保护、在保护中发展。</li>
-<li>我们既要绿水青山，也要金山银山，宁要绿水青山，不要金山银山，而且绿水青山就是金山银山。</li>
-</ol>
-<hr>
-<h2 id="十八-怎样建设美丽中国？"><a href="#十八-怎样建设美丽中国？" class="headerlink" title="十八.怎样建设美丽中国？"></a>十八.怎样建设美丽中国？</h2><ol>
-<li>加快形成绿色生产方式和生活方式。</li>
-<li>坚持山水林田湖草沙一体化保护和系统治理。</li>
-<li>用最严格制度最严密法治保护生态环境。</li>
-</ol>
-<hr>
-<h2 id="十九-如何准确把握“一国”和“两制”的科学内涵？"><a href="#十九-如何准确把握“一国”和“两制”的科学内涵？" class="headerlink" title="十九.如何准确把握“一国”和“两制”的科学内涵？"></a>十九.如何准确把握“一国”和“两制”的科学内涵？</h2><ol>
-<li>牢牢把握“一国两制”维护国家主权、安全、发展利益，保持香港、澳门长期繁荣稳定的根本宗旨。</li>
-<li>准确把握“一国”和“两制”的关系，“一国”是实行“两制”的前提和基础，“两制”从属和派生于“一国”，并统一于“一国”之内。</li>
-<li>坚持中央全面管治权和保障特别行政区高度自治权相统一。</li>
-<li>坚持落实“爱国者治港”“爱国者治澳”原则。</li>
-<li>坚持依法治港治澳，依法治理是最可靠、最稳定的治理。</li>
-</ol>
-<hr>
-<h2 id="二十-为什么说祖国完全统一一定要实现，也一定能够实现？"><a href="#二十-为什么说祖国完全统一一定要实现，也一定能够实现？" class="headerlink" title="二十.为什么说祖国完全统一一定要实现，也一定能够实现？"></a>二十.为什么说祖国完全统一一定要实现，也一定能够实现？</h2><ol>
-<li>实现祖国完全统一是由中华民族伟大复兴的时和势决定的，是不可阻挡的历史潮流。</li>
-<li>民族复兴、国家统一是大势所趋、大义所在、民心所向。</li>
-<li>台湾前途在于国家统一，台湾同胞福祉系于民族复兴。</li>
-<li>统一是历史大势，在正道，“台独”是历史逆流，是绝路。</li>
-</ol>
-<hr>
-<h2 id="二十一-如何认识中国必须有自己特色的大国外交？"><a href="#二十一-如何认识中国必须有自己特色的大国外交？" class="headerlink" title="二十一.如何认识中国必须有自己特色的大国外交？"></a>二十一.如何认识中国必须有自己特色的大国外交？</h2><ol>
-<li>当代中国与外部世界的关系正在发生历史性变化，我国同国际社会的互联互动变得空前紧密。</li>
-<li>中国特色大国外交建立在正确的历史观、大局观、角色观基础之上。</li>
-<li>中国特色大国外交牢牢把握服务民族复兴、促进人类进步这条主线。</li>
-<li>中国特色大国外交坚持正确的原则要求。</li>
-<li>中国特色大国外交展现独特风范。</li>
-</ol>
-<hr>
-<h2 id="二十二-如何推动构建新型国际关系？"><a href="#二十二-如何推动构建新型国际关系？" class="headerlink" title="二十二.如何推动构建新型国际关系？"></a>二十二.如何推动构建新型国际关系？</h2><ol>
-<li>推动构建新型国际关系，就是要秉持相互尊重、公平正义、合作共赢原则，走出一条对话而不对抗、结伴而不结盟的国与国交往新路。</li>
-<li>推进大国协调合作，构建和平共处、总体稳定、均衡发展的大国关系格局。</li>
-<li>坚持亲诚惠容和与邻为善、以邻为伴的周边外交方针，深化同周边国家友好互信和利益融合。</li>
-<li>秉持真实亲诚理念和正确义利观，加强同发展中国家团结合作。</li>
-<li>秉持求同存异、相互尊重、互学互鉴理念，构建新型政党关系。</li>
-</ol>
-<hr>
-<h2 id="二十三-为什么要把党的政治建设摆在首位？"><a href="#二十三-为什么要把党的政治建设摆在首位？" class="headerlink" title="二十三.为什么要把党的政治建设摆在首位？"></a>二十三.为什么要把党的政治建设摆在首位？</h2><ol>
-<li>党的政治建设是党的根本性建设。</li>
-<li>旗帜鲜明讲政治是我们党作为马克思主义政党的根本要求。</li>
-<li>保证全党服从中央，维护党中央权威和集中统一领导，是党的政治建设的首要任务。</li>
-<li>发挥党的政治建设的统领性作用，必须把准政治方向、站稳政治立场、营造良好政治生态、提高政治能力。</li>
-</ol>
-<hr>
-<h2 id="二十四-如何理解党的自我革命是跳出历史周期率的第二个答案？"><a href="#二十四-如何理解党的自我革命是跳出历史周期率的第二个答案？" class="headerlink" title="二十四.如何理解党的自我革命是跳出历史周期率的第二个答案？"></a>二十四.如何理解党的自我革命是跳出历史周期率的第二个答案？</h2><ol>
-<li>勇于自我革命，是中国共产党区别于其他政党的显著标志，也是我们党最大的优势、最鲜明的品格。</li>
-<li>勇于自我革命就要同一切影响党的先进性、弱化党的纯洁性的问题作坚决斗争，实现自我净化、自我完善、自我革新、自我提高。</li>
-<li>我们党成立以来，外靠发展人民民主、接受人民监督，内靠全面从严治党、推进自我革命，保证了党长盛不衰、不断发展壮大。</li>
-</ol>
-<hr>
-<img src="https://wimg.588ku.com/gif/21/10/14/38f49e13b491d9c315d4071023560d3f.gif">]]></content>
-  </entry>
+      
+      
+        <tags>
+            
+            <tag> mysql </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Hello World</title>
+      <link href="/2024/06/25/hello-world/"/>
+      <url>/2024/06/25/hello-world/</url>
+      
+        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+  
+  
 </search>
